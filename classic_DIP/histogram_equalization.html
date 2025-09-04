@@ -40,21 +40,15 @@
 
   <!-- 中間 Video -->
   <div id="video-section">
-    <div class="video-wrapper">
-      <iframe id="player"
-        src="https://www.youtube.com/embed/7hFTRDXPnvM?enablejsapi=1"
-        title="Histogram Equalization"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
+    <div class="video-wrapper" id="player"></div>
   </div>
 
   <!-- 右側 Description -->
   <div id="description">
     <p>
       <strong>Brief Description:</strong> Histogram equalization is an image processing technique used to improve contrast.
-        The objective is to design a transformation that redistributs the pixel intensity values so that they span the full range more evenly.
-        This makes the histogram of the resulting image becomes closer to a uniform (flat) distribution, making details in both dark and bright regions easier to see.
+      The objective is to design a transformation that redistributs the pixel intensity values so that they span the full range more evenly.
+      This makes the histogram of the resulting image becomes closer to a uniform (flat) distribution, making details in both dark and bright regions easier to see.
     </p>
     <img src="./histogram_equalization.png" alt="example of histogram equalization">
   </div>
@@ -64,14 +58,26 @@
 <div id="footer">
   Histogram Equalization (2025/09/02).
 </div>
-    
+
+<!-- YouTube IFrame API -->
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
 let player;
+
+// API 會自動呼叫這個函式
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player');
+  player = new YT.Player('player', {
+    height: '360',
+    width: '640',
+    videoId: '7hFTRDXPnvM',
+    events: {
+      'onReady': onPlayerReady
+    }
+  });
 }
-document.addEventListener("DOMContentLoaded", () => {
+
+// player 建立完成後才綁定 timeline
+function onPlayerReady(event) {
   document.querySelectorAll("#timeline li").forEach(item => {
     item.addEventListener("click", () => {
       const time = parseInt(item.getAttribute("data-time"));
@@ -81,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-});
+}
 </script>
 </body>
 </html>
