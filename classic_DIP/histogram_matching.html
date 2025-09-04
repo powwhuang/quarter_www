@@ -40,13 +40,7 @@
 
   <!-- 中間 Video -->
   <div id="video-section">
-    <div class="video-wrapper">
-      <iframe id="player"
-        src="https://www.youtube.com/embed/fzQE5H4WyK0?enablejsapi=1"
-        title="Histogram Equalization"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
+    <div class="video-wrapper" id="player"></div>
   </div>
 
   <!-- 右側 Description -->
@@ -62,14 +56,26 @@
 <div id="footer">
   Histogram Matching (2025/09/02).
 </div>
-    
+
+<!-- YouTube IFrame API -->
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
 let player;
+
+// API 會自動呼叫這個函式
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player');
+  player = new YT.Player('player', {
+    height: '360',
+    width: '640',
+    videoId: 'fzQE5H4WyK0',
+    events: {
+      'onReady': onPlayerReady
+    }
+  });
 }
-document.addEventListener("DOMContentLoaded", () => {
+
+// player 建立完成後才綁定 timeline
+function onPlayerReady(event) {
   document.querySelectorAll("#timeline li").forEach(item => {
     item.addEventListener("click", () => {
       const time = parseInt(item.getAttribute("data-time"));
@@ -79,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-});
+}
 </script>
 </body>
 </html>
