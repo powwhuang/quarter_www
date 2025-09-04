@@ -378,13 +378,13 @@ toggleBtn.addEventListener('click',()=>{
 
 // 訪客數
 function updateVisitorCount(){
-    fetch('counter.php').then(r=>r.text()).then(c=>{
-        const num=parseInt(c,10);
-        if(!isNaN(num)) document.getElementById('visitorCount').textContent=num;
-    }).catch(e=>console.error(e));
+    fetch('https://api.countapi.xyz/hit/powwhuang.github.io/quarter_www')
+        .then(r=>r.json())
+        .then(data=>{
+            document.getElementById('visitorCount').textContent = data.value;
+        });
 }
 updateVisitorCount();
-setInterval(updateVisitorCount,10000);
 </script>
 </body>
 </html>
