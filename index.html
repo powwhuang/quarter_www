@@ -376,15 +376,19 @@ toggleBtn.addEventListener('click',()=>{
     toggleBtn.textContent=sideBar.classList.contains('collapsed')?"❯":"❮";
 });
 
-// 訪客數
+// === 訪客數: 使用 countapi.xyz ===
 function updateVisitorCount(){
-    fetch('https://api.countapi.xyz/hit/powwhuang.github.io/quarter_www')
-        .then(r=>r.json())
-        .then(data=>{
-            document.getElementById('visitorCount').textContent = data.value;
-        });
+    fetch("https://api.countapi.xyz/hit/powwhuang_quarter/visits")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("visitorCount").textContent = data.value;
+        })
+        .catch(err => console.error("訪客計數錯誤:", err));
 }
+
+// 載入時更新訪客數
 updateVisitorCount();
+
 </script>
 </body>
 </html>
