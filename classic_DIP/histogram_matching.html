@@ -1,0 +1,85 @@
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>Histogram Equalization</title>
+
+<!-- 引入 Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+<!-- 引入 Akaya Kanadaka font-->
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+
+<!-- 導入外部 CSS -->
+<link rel="stylesheet" href="unit.css">
+
+</head>
+<body>
+<div id="container">
+  <!-- 左側 Sidebar -->
+  <div id="sidebar">
+    <div id="toolbar">
+      <a href="https://www.youtube.com/watch?v=fzQE5H4WyK0" target="_blank">
+        <i class="fab fa-youtube" style="color:red;"></i> YouTube
+      </a>
+      <a href="./slides/histogram_matching.pdf" target="_blank">
+        <i class="fas fa-file-powerpoint" style="color:#E86C2A;"></i> PPT
+      </a>
+      <a href="./codes/histogram_matching.pdf" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+    <div id="timeline">
+      <h3>Time Line</h3>
+      <ul>
+        <li data-time="52">Introduction <span>0:52</span></li>
+        <li data-time="209">Histogram Equalization <span>3:29</span></li>
+        <li data-time="374">Matching Algorithm <span>6:14</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 中間 Video -->
+  <div id="video-section">
+    <div class="video-wrapper">
+      <iframe id="player"
+        src="https://www.youtube.com/embed/fzQE5H4WyK0?enablejsapi=1"
+        title="Histogram Equalization"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- 右側 Description -->
+  <div id="description">
+    <p>
+      <strong>Brief Description:</strong> Histogram Matching is an image processing technique aimed at finding a transformation that adjusts the intensity distribution of one image so that it resembles the histogram of a reference image. The main idea is to do the transformation via uniform distribution obtained from histogram equalization algorithm. 
+    </p>
+    <img src="./histogram_matching.png" alt="example of histogram matching">
+  </div>
+</div>
+
+<!-- 最下面 Footer -->
+<div id="footer">
+  Histogram Matching (2025/09/02).
+</div>
+    
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+let player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player');
+}
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("#timeline li").forEach(item => {
+    item.addEventListener("click", () => {
+      const time = parseInt(item.getAttribute("data-time"));
+      if (player && player.seekTo) {
+        player.seekTo(time, true);
+        player.playVideo();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

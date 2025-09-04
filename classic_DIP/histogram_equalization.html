@@ -1,0 +1,87 @@
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>Histogram Equalization</title>
+
+<!-- 引入 Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+<!-- 引入 Akaya Kanadaka font-->
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+
+<!-- 導入外部 CSS -->
+<link rel="stylesheet" href="unit.css">
+
+</head>
+<body>
+<div id="container">
+  <!-- 左側 Sidebar -->
+  <div id="sidebar">
+    <div id="toolbar">
+      <a href="https://www.youtube.com/watch?v=7hFTRDXPnvM" target="_blank">
+        <i class="fab fa-youtube" style="color:red;"></i> YouTube
+      </a>
+      <a href="./slides/histogram_equalization.pdf" target="_blank">
+        <i class="fas fa-file-powerpoint" style="color:#E86C2A;"></i> PPT
+      </a>
+      <a href="./codes/histogram_equalization.pdf" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+    <div id="timeline">
+      <h3>Time Line</h3>
+      <ul>
+        <li data-time="30">Image Histogram <span>0:30</span></li>
+        <li data-time="194">Equalization Algorithm <span>3:14</span></li>
+        <li data-time="415">Theorem and Proof <span>6:55</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 中間 Video -->
+  <div id="video-section">
+    <div class="video-wrapper">
+      <iframe id="player"
+        src="https://www.youtube.com/embed/7hFTRDXPnvM?enablejsapi=1"
+        title="Histogram Equalization"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- 右側 Description -->
+  <div id="description">
+    <p>
+      <strong>Brief Description:</strong> Histogram equalization is an image processing technique used to improve contrast.
+        The objective is to design a transformation that redistributs the pixel intensity values so that they span the full range more evenly.
+        This makes the histogram of the resulting image becomes closer to a uniform (flat) distribution, making details in both dark and bright regions easier to see.
+    </p>
+    <img src="./histogram_equalization.png" alt="example of histogram equalization">
+  </div>
+</div>
+
+<!-- 最下面 Footer -->
+<div id="footer">
+  Histogram Equalization (2025/09/02).
+</div>
+    
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+let player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player');
+}
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("#timeline li").forEach(item => {
+    item.addEventListener("click", () => {
+      const time = parseInt(item.getAttribute("data-time"));
+      if (player && player.seekTo) {
+        player.seekTo(time, true);
+        player.playVideo();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

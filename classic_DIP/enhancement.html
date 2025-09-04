@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>影像強化介紹</title>
+<style>
+    body {
+        margin: 20px;
+        background-color: #fff;
+        color: #000;
+        font-family: "標楷體", "DFKai-SB", serif;
+    }
+    .en {
+        font-family: "Times New Roman", Times, serif;
+    }
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+    ul {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-left: 20px;
+    }
+    ul li {
+        margin-bottom: 6px;
+    }
+    a {
+        color: #0056b3;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+    <h1>影像強化 (<span class="en">Image Enhancement</span>)</h1>
+    <p>
+        所謂影像強化（<span class="en">image enhancement</span>）就是透過轉換影像像素點的亮度強度，
+        以提升或增強影像的品質，使影像更適合顯示或者符合特定應用的需求。
+        換言之，影像強化會使影像更清晰、對比度更佳或細節更顯著，
+        例如：把過度曝光的照片調暗，或者增加灰階對比。
+    </p>
+
+    <p>
+        常見的影像強化演算法主要可分為<strong>空間域演算法</strong>
+        （<span class="en">spatial domain</span>）與<strong>頻率域演算法</strong>
+        （<span class="en">frequency domain</span>）。
+    </p>
+    <ul>
+        <li>空間域：利用像素位置與鄰近關係來決定亮度轉換。</li>
+        <li>頻率域：利用傅立葉轉換（<span class="en">Fourier Transform</span>）
+            將影像轉換到頻率空間，再進行強化。</li>
+    </ul>
+
+    <p>
+        本章節內容主要包含<strong>空間域演算法</strong>
+        （<span class="en">spatial domain</span>）。一般來說，空間域影像強化演算法又可細分為
+        <strong>直方圖處理</strong>（<span class="en">histogram processing</span>）
+        與<strong>空域濾波器</strong>（<span class="en">spatial filter</span>）兩大類。
+    </p>
+
+    <p>
+        直方圖處理是透過分析整張影像的亮度直方圖，作為亮度轉換的主要依據。常見方法包括：
+    </p>
+    <ul>
+        <li>
+            <a href="histogram_equalization.html">
+                直方圖均化 (<span class="en">Histogram Equalization</span>)
+            </a>
+        </li>
+        <li>
+            <a href="histogram_matching.html">
+            直方圖匹配 (<span class="en">Histogram Matching</span>)
+            </a>
+        </li>
+    </ul>
+    
+    <p>
+        空域濾波器則是根據鄰近像素的亮度值作為轉換依據，主要包含兩類：
+    </p>
+    <ul>
+        <li>平滑（<span class="en">Smoothing</span>）</li>
+        <li>銳化（<span class="en">Sharpening</span>）</li>
+    </ul>
+</body>
+</html>

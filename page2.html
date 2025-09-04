@@ -1,0 +1,222 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <title>Two-Pass Connected Component Labeling for Binary Image</title>
+    <link href="styles/DIP_twoPassContected.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="quarter">
+        <a href="home.html"><img src="images/quarter.png" alt="quarter"></a>
+    </div>
+    
+    <div class="index">
+        <div class="lineL"></div>
+        <div class="option">
+            <div class="unit">
+                <a class="nav-link " href="#" id="navbardrop" data-toggle="dropdown">Unit List</a>
+                  <div class="dropdown-menu">
+                    <div class="dropdown dropright dropdown-submenu">
+                      <div class="menu">
+                      <a class="dropdown-item " href="dip.html">Basic Digital Image Processing</a>
+                      </div>
+                      <div class="dropdown-menu">
+                        <div class="submenu">
+                          <ul class="block"><em>
+                          <div class="abreast">
+                            <a class="dropdown-item" href="DIP_histogramEqualization.html"><li>Histogram Equalization</li></a>
+                            <a class="dropdown-item" href="DIP_histogramMatching.html"><li>Histogram Matching (Specification)</li></a>
+                          </div>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="DIP_twoPassConnected.html"><li>Two-Pass Connected Component <br>Labeling for Binary Image</li></a></div>
+                            <a class="dropdown-item" href="DIP_kalmanFilter.html"><li>Introduction to Kalman Filter</li></a>
+                          </div> 
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="DIP_otsuAlgorithm.html"><li>Otsu Algorithm: <br>Optimal Global Thresholding</li></a></div>
+                            <div class="space"><a class="dropdown-item" href="DIP_determiningOpticalFlow.html"><li>Determining Optical Flow: <br>Horn Schunck Method</li></a></div>
+                          </div>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="DIP_houghTransform.html"><li>Hough Transform: <br>A Case Study of Line Detection</li></a></div>
+                            <a class="dropdown-item" href="DIP_LBP.html"><li>LBP: Local Binary Pattern</li></a>
+                          </div>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="DIP_SVM.html"><li>Support Vector Machine (SVM): <br>Two Separable Classes</li></a></div>
+                            <a class="dropdown-item" href="DIP_haarLikeFeature.html"><li>Haar-Like Feature</li></a>
+                          </div>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="DIP_GMM.html"><li>Gaussian Mixture Models (GMM) <br>for Background Subtraction</li></a></div>
+                            <div class="space"><a class="dropdown-item" href="DIP_efficientGraphBased.html"><li>Efficient Graph-Based <br>Image Segmentation</li></a></div>
+                          </div>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="DIP_realTime.html"><li>Real-time Foreground-Background <br>Segmentation Using Codebook Model</li></a></div>
+                            <div class="space"><a class="dropdown-item" href="DIP_HOGS.html"><li>HOGs: <br>Histogram of Oriented Gradients</li></a></div>
+                          </div>  
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="DIP_HLID.htmlS"><li>HLID: <br>Histograms of Local Intensity Difference</li></a></div>
+                          </div>
+                          </em></ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dropdown dropright dropdown-submenu">
+                      <div class="menu">
+                        <a class="dropdown-item " href="cnn.html" class="btn btn-danger" >Convolutional Neural Networks</a>
+                      </div>
+                      <div class="dropdown-menu">
+                        <div class="submenu">
+                          <ul class="block"><em>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="CNN_faceNet.html"><li>FaceNet: A Unified Embedding for <br>Face Recognition and Clustering</li></a></div>
+                            <a class="dropdown-item" href="CNN_deepResidualNetworks.html"><li>Deep Residual Networks</li></a>
+                          </div>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="CNN_YOLO.html"><li>You Only Look Once (YOLO v1): <br>Unified Real-Time Object Detection</li></a></div>
+                            <a class="dropdown-item" href="CNN_RPN.html"><li>RPN: Region Proposal Networks</li></a>
+                          </div>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="CNN_featurePyramidNetwork.html"><li>Feature Pyramid Networks for <br>Object Detection</li></a></div>
+                            <a class="dropdown-item" href="CNN_fasterRcnn.html"><li>Faster R-CNN</li></a>
+                          </div>
+                          <div class="abreast">
+                            <div class="space"><a class="dropdown-item" href="CNN_ROI.html"><li>Region of Interest (RoI) Pooling <br>and Align</li></a></div>
+                            <a class="dropdown-item" href="CNN_maskRcnn.html"><li>Mask R-CNN</li></a>
+                          </div>
+                          </em></ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dropdown dropright dropdown-submenu">
+                      <div class="menu">
+                        <a class="dropdown-item " href="python.html" class="btn btn-danger" >Python Programming</a>
+                      </div>
+                      <div class="dropdown-menu">
+                        <div class="submenu">
+                        <ul class="block"><em>
+                          <a class="dropdown-item" href="PY_googleColab.html"><li>Basic Digital Image Processing Using OpenCV on Google Colab</li></a>
+                          <a class="dropdown-item" href="PY_linearRegression.html"><li>Beginner's Guide on PyTorch from Linear Regression</li></a>
+                        </em></ul> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="track">
+              <a class="nav-link " href="#" id="navbardrop" data-toggle="dropdown">Topic Track</a>
+                <div class="dropdown-menu">
+                  <div class="dropdown dropright dropdown-submenu">
+                    <div class="menu">
+                      <a class="dropdown-item" href="TOP_imageEnhancement.html">Image Enhancement</a>
+                    </div>
+                    <div class="dropdown-menu">
+                      <div class="submenu">
+                        <ul class="block"><em>
+                          <a class="dropdown-item" href="DIP_histogramEqualization.html"><li>Histogram Equalization</li></a>
+                          <a class="dropdown-item" href="DIP_histogramMatching.html"><li>Histogram Matching (Specification)</li></a>
+                        </em></ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dropdown dropright dropdown-submenu">
+                    <div class="menu">
+                      <a class="dropdown-item" href="TOP_textureFeature.html">Texture Feature</a>
+                    </div>
+                    <div class="dropdown-menu">
+                      <div class="submenu">
+                        <ul class="block"><em>
+                          <a class="dropdown-item" href="DIP_LBP.html"><li>LBP: Local Binary Pattern</li></a>
+                          <a class="dropdown-item" href="DIP_haarLikeFeature.html"><li>Haar-Like Feature</li></a>
+                          <a class="dropdown-item" href="DIP_HOGS.html"><li>HOGs: Histogram of Oriented Gradients</li></a>
+                          <a class="dropdown-item" href="DIP_HLID.htmlS"><li>HLID: Histograms of Local Intensity Difference</li></a>
+                        </em></ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dropdown dropright dropdown-submenu">
+                    <div class="menu">
+                      <a class="dropdown-item" href="TOP_backgroundSubtraction.html">Background Subtraction</a>
+                    </div>
+                    <div class="dropdown-menu">
+                      <div class="submenu">
+                        <ul class="block"><em>
+                          <a class="dropdown-item" href="DIP_GMM.html"><li>Gaussian Mixture Models (GMM) for Background Subtraction</li></a>
+                          <a class="dropdown-item" href="DIP_realTime.html"><li>Real-time Foreground-Background Segmentation Using Codebook Model</li></a>
+                        </em></ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dropdown dropright dropdown-submenu">
+                    <div class="menu">
+                      <a class="dropdown-item" href="TOP_objectDetection.html">Object Detection</a>
+                    </div>
+                    <div class="dropdown-menu">
+                      <div class="submenu">
+                        <ul class="block"><em>
+                          <a class="dropdown-item" href="CNN_YOLO.html"><li>You Only Look Once (YOLO v1): Unified Real-Time Object Detection</li></a>
+                          <a class="dropdown-item" href="CNN_RPN.html"><li>RPN: Region Proposal Networks</li></a>
+                          <a class="dropdown-item" href="CNN_featurePyramidNetwork.html"><li>Feature Pyramid Networks for Object Detection</li></a>
+                          <a class="dropdown-item" href="CNN_fasterRcnn.html"><li>Faster R-CNN</li></a>
+                        </em></ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dropdown dropright dropdown-submenu">
+                    <div class="menu">
+                      <a class="dropdown-item" href="TOP_instanceSegmentation.html">Instance Segmentation</a>
+                    </div>
+                    <div class="dropdown-menu">
+                      <div class="submenu">
+                        <ul class="block"><em>
+                          <a class="dropdown-item" href="CNN_maskRcnn.html"><li>Mask R-CNN</li></a>
+                        </em></ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="short">Short Course</div>
+            <div class="about"><a href="about.html">About Us</a></div>
+        </div>
+        <div class="lineR"></div>
+    </div>
+
+    <div class="left">
+        <div class="circle"></div>
+        <div class="icon">
+            <a href="https://www.youtube.com/watch?v=3PYI3pg7uvE" target="_blank"><img src="images/youtube.png" alt="youtube"></a>
+            <a href="pdf/DIP_Two-Pass Connected Component Labeling for Binary Image_2020_1122.pdf" target="_blank"><img src="images/ppt.png" alt="ppt"></a>
+            <a href="https://github.com/quarterhuang2018/github_DIP/blob/main/connected%20component%20labeling/TwoPassCCL.ipynb" target="_blank"><img src="images/github.png" alt="github"></a>
+        </div>
+        
+        <div class="subtitle">Two-Pass Connected Component Labeling for Binary Image</div>
+        <div class="line"></div>
+        <div class="topic">image segmentation</div>
+    </div>
+
+    <div class="background">
+    </div>
+
+    <div class="video">
+        <iframe width="480" height="360" src="https://www.youtube.com/embed/3PYI3pg7uvE" title="quarter DIP Two Pass Connected Component Labeling for Binary Image" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+
+    <ul class="timeline">
+        <div class="part1">
+        <p><b>Introduction</b></p>
+        <li>About CCL <a href="https://youtu.be/3PYI3pg7uvE?t=63" target="_blank"><span>1:03</span></a></li>
+        <li>Connectivity <a href="https://youtu.be/3PYI3pg7uvE?t=194" target="_blank"><span>3:14</span></a></li>
+        <li>Connected Component <a href="https://youtu.be/3PYI3pg7uvE?t=308" target="_blank"><span>5:08</span></a></li>
+        </div>
+        <div class="part2">
+        <p><b>Two-Pass Labeling</b></p>
+        <li>Approach Overview <a href="https://youtu.be/3PYI3pg7uvE?t=395" target="_blank"><span>6:35</span></a></li>
+        <li>First Pass <a href="https://youtu.be/3PYI3pg7uvE?t=546" target="_blank"><span>9:06</span></a></li>
+        <li>Second Pass <a href="https://youtu.be/3PYI3pg7uvE?t=746" target="_blank"><span>12:26</span></a></li>
+        </div>
+    </ul>
+    
+</body>
+</html>

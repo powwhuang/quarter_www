@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarter</title>
+<style>
+@font-face {
+    font-family: 'Akaya Kanadaka';
+    src: url('./fonts/Akaya-Kanadaka.ttf') format("opentype");
+}
+body {
+    margin: 0;
+    font-family: 'Akaya Kanadaka', cursive;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #fff;
+}
+header { background: #fff; color: #000; padding: 12px 16px; display: flex; align-items: center; position: relative; }
+header h1 { font-size: 40px; margin:0; position: absolute; left:50%; transform: translateX(-50%); }
+header .logo { height: 40px; }
+header .slogan { font-size:20px; margin:0; color:#555; }
+
+.top-menu { display:flex; gap:16px; background:#e1e5e9; padding:8px 16px; border-bottom:1px solid #e2e8f0; }
+.top-menu a { text-decoration:none; color:#0b1220; font-size:20px; font-weight:500; padding:4px 8px; }
+.top-menu a:hover { background:#e2e8f0; border-radius:4px; }
+
+.container { flex:1; display:flex; position:relative; min-height:0; }
+
+/* 側邊欄水平排列 */
+.side-bar {
+    width: 350px;
+    background: #f9fafb;
+    border-right:1px solid #e2e8f0;
+    display:flex;
+    flex-direction: row; /* 水平排列 */
+    height:100%;
+    transition: width 0.3s ease;
+    overflow:hidden;
+    position: relative;
+}
+.side-bar.collapsed { width:0; }
+
+.sidebar-top, .sidebar-bottom {
+    flex:1;
+    padding:10px;
+    overflow-y:auto;
+    border-right:1px solid #e2e8f0;
+}
+.sidebar-bottom {
+    background:#f5f7fa;
+    border-right:none; /* 最右邊不用邊框 */
+}
+
+.sidebar-title {
+    font-size:18px;
+    font-weight:bold;
+    color:#0b1220;
+    margin-bottom:8px;
+}
+
+/* 樹狀結構 */
+.tree, .tree ul { list-style:none; padding-left:0; margin:0; }
+.tree li { cursor:pointer; font-size:16px; color:#334155; margin:4px 0; white-space:nowrap; position:relative; }
+.tree li a { text-decoration:none; color:inherit; display:block; padding:2px 4px; border-radius:4px; }
+.tree li a:hover { color:#0b1220; font-weight:500; }
+.tree li.folder::before {
+    content:"▸";
+    font-family:Arial,sans-serif !important;
+    font-size:16px;
+    display:inline-block;
+    width:20px;
+    transition: transform 0.3s ease;
+}
+.tree li.folder.open::before { transform:rotate(90deg); }
+.tree ul {
+    max-height:0;
+    overflow:hidden;
+    margin-left:20px;
+    transition: max-height 0.3s ease;
+}
+.tree li.folder.open > ul { max-height:1000px; }
+
+/* Quick Links */
+.item-list { list-style:none; padding-left:0; margin:0; }
+.item-list li {
+    position: relative;
+    padding-left: 16px; /* 留空間給符號 */
+}
+.item-list li::before {
+    content: "•";        /* 項目符號 */
+    position: absolute;
+    left: 0;
+    color: #0b1220;
+    font-size: 16px;
+    line-height: 1;
+}
+.item-list li a { text-decoration:none; color:#334155; display:block; padding:2px 4px; border-radius:4px; }
+.item-list li a:hover { color:#0b1220; font-weight:500; }
+
+/* 選中高亮 */
+.tree li a.active, .item-list li a.active,
+.tree li.folder.active { 
+    background: #f0f0f0;
+    color: #1e293b;
+    font-weight: bold;
+    border-radius: 6px;
+    padding-left:6px;
+}
+
+/* toggle 按鈕 */
+.toggle-button {
+    position:absolute;
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+    width:20px;
+    height:40px;
+    background:#0b1220;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    font-size:16px;
+    z-index:1100;
+    user-select:none;
+    border-radius:0 4px 4px 0;
+}
+.viewer {
+    flex:1;
+    border:none;
+    background:#fff;
+    transition: width 0.3s ease;
+    width: calc(100% - 300px);
+    height:100%;
+}
+.viewer.collapsed { width:100%; }
+
+footer {
+    height:50px;
+    background:#f1f5f9;
+    border-top:1px solid #e2e8f0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 16px;
+    font-size:14px;
+    color:#475569;
+}
+</style>
+</head>
+<body>
+<header>
+    <img src="./images/quarter.png" alt="Logo" class="logo">
+    <p class="slogan">give me a quarter; give you a circle</p>
+    <h1>Quarter</h1>
+</header>
+
+<nav class="top-menu">
+    <a href="home.html">Home</a>
+    <a href="#">About</a>
+</nav>
+
+<div class="container">
+    <div class="side-bar" id="sideBar">
+        <div class="sidebar-top">
+            <div class="sidebar-title">Topics</div>
+            <ul class="tree" id="treeMenu"></ul>
+        </div>
+        <div class="sidebar-bottom">
+            <div class="sidebar-title">Units</div>
+            <ul class="item-list" id="bottomList"></ul>
+        </div>
+    </div>
+
+    <div class="toggle-button" id="toggleBtn">❮</div>
+
+    <iframe id="pdfFrame" class="viewer" src="main.pdf" name="pdfFrame"></iframe>
+</div>
+
+<footer>
+    <span>版本: 1.0.0</span>
+    <span>瀏覽人數: <span id="visitorCount">0</span></span>
+</footer>
+
+<script>
+// 側邊選單結構 + units 一起定義
+const menuData = {
+    "Classic DIP": {
+        "Enhancement": {
+            link:"./classic_DIP/enhancement.html",
+            units:[
+                {name:"Histogram Equalization",href:"./classic_DIP/histogram_equalization.html"},
+                {name:"Histogram Matching",href:"./classic_DIP/histogram_matching.html"}
+            ]
+        },
+        
+        "Segmentation": {
+            link:"page2.html",
+            units:[
+                {name:"Otsu Thresholding",href:"#"},
+                {name:"Two-Pass Connected Component Labeling",href:"#"},
+                {name:"Graph Segmentation",href:"#"},
+                {name:"Interactive Graph Cuts",href:"#"}
+            ]
+        },
+        
+        "Texture Feature": {
+            link:"page2.html",
+            units:[
+                {name:"Haar-Like Feature",href:"#"},
+                {name:"LBP: Local Binary Pattern",href:"#"},
+                {name:"HOGs: Histogram of Oriented Gradients",href:"#"},
+                {name:"HLID: Histogram of Local Intensity Difference",href:"#"}
+            ]
+        }
+    },
+	
+    "Classic Video Processing": {
+        "Background Subtraction":{
+            link: "page2.html",
+            units:[
+                {name:"Gaussian Mixture Models (GMM)",href:"#"},
+                {name:"Real-time Foreground-Background Segmentation Using Codebook Model",href:"#"}
+            ]
+        }
+    },
+    
+    "CNN DIP": {
+        "Object Classification": {
+            link:"page2.html",
+            units:[
+                {name:"RPN:Region Proposal Networks",href:"#"},
+                {name:"FPN: Feature Pyramid Networks",href:"#"},
+                {name:"Faster R-CNN",href:"#"}
+            ]
+        },
+        "Object Detection": {
+            link:"page2.html",
+            units:[
+                {name:"RPN:Region Proposal Networks",href:"#"},
+                {name:"FPN: Feature Pyramid Networks",href:"#"},
+                {name:"Faster R-CNN",href:"#"},
+                {name:"You Only Look Once (YOLO v1): Unified Real-Time Object Detectio",href:"#"},                
+            ]
+        },
+        
+        "Instance Segmentation": {
+            link:"page2.html",
+            units:[
+                {name:"Mask R-CNN",href:"#"},                
+            ]
+        }
+
+        
+    },
+    
+    "Recurrent Neural Network": {
+        "Introduction": {
+            link:"main.pdf",
+            units:[
+                {name:"Gentle Introduction",href:"#"}
+            ]            
+        }
+    },
+    
+    "Reinforcement Learning": {
+        "Introduction": {
+            link:"main.pdf",
+            units:[
+                {name:"Gentle Introduction",href:"#"}
+            ]            
+        }
+    }
+};
+
+// === DOM ===
+const treeMenu=document.getElementById('treeMenu');
+const bottomList=document.getElementById('bottomList');
+const viewer=document.getElementById('pdfFrame');
+const sideBar=document.getElementById('sideBar');
+const toggleBtn=document.getElementById('toggleBtn');
+
+// === 遞迴生成樹狀選單 ===
+function buildTree(data,parent){
+    for(const key in data){
+        if(key==="units") continue;
+        const val=data[key];
+        const li=document.createElement('li');
+
+        if(typeof val==="object" && !val.link){
+            li.classList.add('folder');
+            li.textContent=key;
+            const ul=document.createElement('ul');
+            buildTree(val,ul);
+            li.appendChild(ul);
+        }else{
+            const a=document.createElement('a');
+            a.textContent=key;
+            a.href=val.link;
+            a.target="pdfFrame";
+            li.appendChild(a);
+        }
+        parent.appendChild(li);
+    }
+}
+buildTree(menuData,treeMenu);
+
+// === 公用：移除所有 active ===
+function removeActive(){
+    document.querySelectorAll('.tree li a, .item-list li a, .tree li.folder')
+        .forEach(el=>el.classList.remove('active'));
+}
+
+// === 更新 Quick Links ===
+function updateQuickLinks(key,data){
+    bottomList.innerHTML="";
+    const items=(data[key] && data[key].units) || [];
+    items.forEach(it=>{
+        const li=document.createElement('li');
+        const a=document.createElement('a');
+        a.textContent=it.name;
+        a.href=it.href;
+        a.target="pdfFrame"; 
+        li.appendChild(a);
+        bottomList.appendChild(li);
+    });
+}
+
+// === Folder 點擊 (展開/收合 + Quick Links) ===
+treeMenu.addEventListener('click',e=>{
+    const target=e.target;
+    if(target.tagName.toLowerCase()==="li" && target.classList.contains('folder')){
+        target.classList.toggle('open');
+        removeActive();
+        target.classList.add('active');
+        const key=target.firstChild.textContent.trim();
+        updateQuickLinks(key,menuData);
+    }
+});
+
+// === 子節點 (a) 點擊 (高亮 + Quick Links) ===
+treeMenu.addEventListener('click',e=>{
+    if(e.target.tagName.toLowerCase()==="a"){
+        removeActive();
+        e.target.classList.add('active');
+        let parent=e.target.closest('li.folder');
+        while(parent){
+            parent.classList.add('active');
+            parent=parent.parentElement.closest('li.folder');
+        }
+        const key=e.target.textContent.trim();
+        for(const top in menuData){
+            if(menuData[top][key]){
+                updateQuickLinks(key,menuData[top]);
+                break;
+            }
+        }
+    }
+});
+
+// Quick Links 點擊高亮
+bottomList.addEventListener('click',e=>{
+    if(e.target.tagName.toLowerCase()==="a"){
+        removeActive();
+        e.target.classList.add('active');
+    }
+});
+
+// Toggle 側邊欄
+toggleBtn.addEventListener('click',()=>{
+    sideBar.classList.toggle('collapsed');
+    viewer.classList.toggle('collapsed');
+    toggleBtn.textContent=sideBar.classList.contains('collapsed')?"❯":"❮";
+});
+
+// 訪客數
+function updateVisitorCount(){
+    fetch('counter.php').then(r=>r.text()).then(c=>{
+        const num=parseInt(c,10);
+        if(!isNaN(num)) document.getElementById('visitorCount').textContent=num;
+    }).catch(e=>console.error(e));
+}
+updateVisitorCount();
+setInterval(updateVisitorCount,10000);
+</script>
+</body>
+</html>
