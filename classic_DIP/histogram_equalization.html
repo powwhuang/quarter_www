@@ -64,10 +64,7 @@
   <!-- 中間 Video -->
   <div id="video-section">
     <div class="video-wrapper">
-      <iframe id="player" 
-        src="https://www.youtube.com/embed/7hFTRDXPnvM?enablejsapi=1"
-        frameborder="0" allowfullscreen>
-      </iframe>
+      <div id="player"></div> <!-- 注意：不要先放 iframe，交給 API 建立 -->
     </div>
   </div>
 
@@ -87,49 +84,35 @@
   Histogram Equalization (2025/09/02).
 </div>
 
-<!-- 控制影片播放 -->
+<!-- YouTube IFrame API -->
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-let playerReady = false;
+let player;
 
-// 告訴 YouTube 這個 iframe 準備接收 API 訊息
-window.onload = function() {
-  const iframe = document.getElementById("player");
-  iframe.contentWindow.postMessage(JSON.stringify({
-    event: "listening",
-    id: "player"
-  }), "*");
-};
-
-// 監聽來自 YouTube 的 ready 訊號
-window.addEventListener("message", function(event) {
-  if (event.data && typeof event.data === "string" && event.data.indexOf("onReady") > -1) {
-    playerReady = true;
-  }
-});
-
-// 跳轉時間 + 播放
-function seekTo(seconds) {
-  if (!playerReady) return; // 確保 ready 才執行
-  const iframe = document.getElementById("player");
-  iframe.contentWindow.postMessage(JSON.stringify({
-    event: "command",
-    func: "seekTo",
-    args: [seconds, true]
-  }), "*");
-  iframe.contentWindow.postMessage(JSON.stringify({
-    event: "command",
-    func: "playVideo",
-    args: []
-  }), "*");
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    videoId: '7hFTRDXPnvM',
+    playerVars: {
+      rel: 0,
+      modestbranding: 1
+    },
+    events: {
+      'onReady': onPlayerReady
+    }
+  });
 }
 
-// 綁定 timeline
-document.querySelectorAll("#timeline li").forEach(item => {
-  item.addEventListener("click", () => {
-    const time = parseInt(item.getAttribute("data-time"));
-    seekTo(time);
+function onPlayerReady() {
+  document.querySelectorAll("#timeline li").forEach(item => {
+    item.addEventListener("click", () => {
+      const time = parseInt(item.getAttribute("data-time"));
+      if (player && player.seekTo) {
+        player.seekTo(time, true);
+        player.playVideo();
+      }
+    });
   });
-});
+}
 </script>
 </body>
 </html>
