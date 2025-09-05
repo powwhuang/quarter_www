@@ -5,13 +5,36 @@
 
 <!-- 引入 Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
 <!-- 引入 Akaya Kanadaka font-->
 <link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
 
 <!-- 導入外部 CSS -->
 <link rel="stylesheet" href="unit.css">
 
+<style>
+/* 讓影片自適應 RWD */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#timeline li {
+  cursor: pointer;
+  padding: 5px;
+  transition: background 0.3s;
+}
+#timeline li:hover {
+  background: #f0f0f0;
+}
+</style>
 </head>
 <body>
 <div id="container">
@@ -40,9 +63,15 @@
 
   <!-- 中間 Video -->
   <div id="video-section">
-    <div class="video-wrapper" id="player"></div>
+    <div class="video-wrapper">
+      <iframe id="player"
+        src="https://www.youtube.com/embed/fzQE5H4WyK0"
+        frameborder="0" allowfullscreen>
+      </iframe>
+    </div>
   </div>
 
+  <!-- 右側 Description -->
   <!-- 右側 Description -->
   <div id="description">
     <p>
@@ -57,35 +86,17 @@
   Histogram Matching (2025/09/02).
 </div>
 
-<!-- YouTube IFrame API -->
-<script src="https://www.youtube.com/iframe_api"></script>
+<!-- 控制影片播放（直接改 src） -->
 <script>
-let player;
+const videoId = "fzQE5H4WyK0";
+const player = document.getElementById("player");
 
-// API 會自動呼叫這個函式
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
-    height: '360',
-    width: '640',
-    videoId: 'fzQE5H4WyK0',
-    events: {
-      'onReady': onPlayerReady
-    }
+document.querySelectorAll("#timeline li").forEach(item => {
+  item.addEventListener("click", () => {
+    const time = parseInt(item.getAttribute("data-time"));
+    player.src = `https://www.youtube.com/embed/${videoId}?start=${time}&autoplay=1`;
   });
-}
-
-// player 建立完成後才綁定 timeline
-function onPlayerReady(event) {
-  document.querySelectorAll("#timeline li").forEach(item => {
-    item.addEventListener("click", () => {
-      const time = parseInt(item.getAttribute("data-time"));
-      if (player && player.seekTo) {
-        player.seekTo(time, true);
-        player.playVideo();
-      }
-    });
-  });
-}
+});
 </script>
 </body>
 </html>
