@@ -2,142 +2,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Histogram Equalization</title>
+
 <!-- 引入 Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- 引入 Akaya Kanadaka font-->
 <link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+
+<!-- 導入外部 CSS -->
+<link rel="stylesheet" href="unit.css">
+
 <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-  }
-  #container {
-    display: flex;
-    width: 90%;
-    height: 90%;
-    background: white;
-  }
-  #sidebar {
-    width: 220px;
-    border: 1px solid #999; /* 加上邊框 */
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    box-sizing: border-box;
-  }
-  #toolbar {
-    padding: 6px 10px;
-    border-bottom: 1px solid #ccc;
-    background: #f9f9f9;
-    display: flex;
-    gap: 10px;
-    flex-wrap: nowrap;
-  }
-  #toolbar a {
-    text-decoration: none;
-    font-size: 14px;
-    color: #333;
-    display: flex;
-    flex-direction: column; /* 圖上文字下 */
-    align-items: center;
-    gap: 4px;
-    padding: 6px 4px;
-    border-radius: 6px;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-  }
-  #toolbar a:hover {
-    color: #007bff;
-    background: rgba(0, 123, 255, 0.1);
-    box-shadow: 0 0 4px rgba(0,0,0,0.15);
-  }
-  #timeline {
-    padding: 10px;
-    font-family: 'Akaya Kanadaka', cursive;
-    font-size: 16px;
-    color: #333;
-    overflow-y: auto;
-    flex: 1;
-  }
-  #timeline h3 {
-    margin-top: 0;
-    font-size: 16px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 4px;
-  }
-  #timeline ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  #timeline li {
-    margin: 8px 0;
-    cursor: pointer;
-  }
-  #timeline li span {
-    font-weight: bold;
-    color: #007bff;
-    margin-left: 5px;
-  }
-
-  #video-section {
-    flex: 1;
-    border: 1px solid #999; /* 加上邊框 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: 0 10px;
-    box-sizing: border-box;
-  }
-  .video-wrapper {
-    position: relative;
-    width: 90%;
-    max-width: 640px;
-    aspect-ratio: 4/3;
-  }
-  .video-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  #description {
-    width: 250px;
-    margin-left: 10px;
-    font-family: 'Akaya Kanadaka', cursive;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #444;
-    overflow-y: auto;
-    text-align: justify;
-    border: 1px solid #999; /* 加上邊框 */
-    padding: 8px;
-    box-sizing: border-box;
-  }
-
-  #description p {
-    margin-top: 0;
-  }
-    
-  #description img {
-      display: block;
-      max-width: 100%; /* 不會超過父容器寬度 */
-      height: auto;    /* 保持比例 */
-      margin: 10px auto; /* 置中並加一點間距 */
-      border-radius: 6px;
-      border: 1px solid #ddd;
-      box-sizing: border-box;
-  }
-    
+/* 讓影片自適應 RWD */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#timeline li {
+  cursor: pointer;
+  padding: 5px;
+  transition: background 0.3s;
+}
+#timeline li:hover {
+  background: #f0f0f0;
+}
 </style>
 </head>
 <body>
@@ -169,10 +65,9 @@
   <div id="video-section">
     <div class="video-wrapper">
       <iframe id="player"
-        src="https://www.youtube.com/embed/7hFTRDXPnvM?enablejsapi=1"
-        title="Histogram Equalization"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+        src="https://www.youtube.com/embed/7hFTRDXPnvM"
+        frameborder="0" allowfullscreen>
+      </iframe>
     </div>
   </div>
 
@@ -180,28 +75,27 @@
   <div id="description">
     <p>
       <strong>Brief Description:</strong> Histogram equalization is an image processing technique used to improve contrast.
-        The objective is to design a transformation that redistributs the pixel intensity values so that they span the full range more evenly.
-        This makes the histogram of the resulting image becomes closer to a uniform (flat) distribution, making details in both dark and bright regions easier to see.
+      The objective is to design a transformation that redistributes the pixel intensity values so that they span the full range more evenly.
+      This makes the histogram of the resulting image becomes closer to a uniform (flat) distribution, making details in both dark and bright regions easier to see.
     </p>
     <img src="./histogram_equalization.png" alt="example of histogram equalization">
   </div>
 </div>
 
-<script src="https://www.youtube.com/iframe_api"></script>
+<!-- 最下面 Footer -->
+<div id="footer">
+  Histogram Equalization (2025/09/02).
+</div>
+
+<!-- 控制影片播放（直接改 src） -->
 <script>
-let player;
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player');
-}
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("#timeline li").forEach(item => {
-    item.addEventListener("click", () => {
-      const time = parseInt(item.getAttribute("data-time"));
-      if (player && player.seekTo) {
-        player.seekTo(time, true);
-        player.playVideo();
-      }
-    });
+const videoId = "7hFTRDXPnvM";
+const player = document.getElementById("player");
+
+document.querySelectorAll("#timeline li").forEach(item => {
+  item.addEventListener("click", () => {
+    const time = parseInt(item.getAttribute("data-time"));
+    player.src = `https://www.youtube.com/embed/${videoId}?start=${time}&autoplay=1`;
   });
 });
 </script>
