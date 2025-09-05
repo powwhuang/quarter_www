@@ -12,8 +12,9 @@ const unit_data = {
         "Segmentation": {
             link:"page2.html",
             units:[
-                {name:"Otsu Thresholding",href:"#"},
+                {name:"Otsu Thresholding",href:"./classic_DIP/otsu_thresholding.html"},
                 {name:"Two-Pass Connected Component Labeling",href:"#"},
+                {name:"Hough Transform",href:"#"},                
                 {name:"Graph Segmentation",href:"#"},
                 {name:"Interactive Graph Cuts",href:"#"}
             ]
