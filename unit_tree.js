@@ -14,7 +14,7 @@ const unit_data = {
             units:[
                 {name:"Otsu Thresholding",href:"./classic_DIP/otsu_thresholding.html"},
                 {name:"Two-Pass Connected Component Labeling",href:"./classic_DIP/two_pass_connected_components.html"},
-                {name:"Hough Transform",href:"#"},                
+                {name:"Hough Transform",href:"./classic_DIP/hough_transform.html"},                
                 {name:"Graph Segmentation",href:"#"},
                 {name:"Interactive Graph Cuts",href:"#"}
             ]
