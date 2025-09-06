@@ -1,0 +1,105 @@
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>Hough Transform</title>
+
+<!-- 引入 Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- 引入 Akaya Kanadaka font-->
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+
+<!-- 導入外部 CSS -->
+<link rel="stylesheet" href="unit.css">
+
+<style>
+/* 讓影片自適應 RWD */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#timeline li {
+  cursor: pointer;
+  padding: 5px;
+  transition: background 0.3s;
+}
+#timeline li:hover {
+  background: #f0f0f0;
+}
+</style>
+</head>
+<body>
+<div id="container">
+  <!-- 左側 Sidebar -->
+  <div id="sidebar">
+    <div id="toolbar">
+      <a href="https://www.youtube.com/watch?v=JLidIrekDbg" target="_blank">
+        <i class="fab fa-youtube" style="color:red;"></i> YouTube
+      </a>
+      <a href="./slides/Hough_Transform.pdf" target="_blank">
+        <i class="fas fa-file-powerpoint" style="color:#E86C2A;"></i> PPT
+      </a>
+      <a href="./codes/histogram_matching.pdf" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+    <div id="timeline">
+      <h3>Time Line</h3>
+      <ul>
+        <li data-time="55">History <span>0:55</span></li>
+        <li data-time="85">Purpose <span>1:25</span></li>
+        <li data-time="183">Idea <span>3:03</span></li>
+        <li data-time="324">Shape Parameterization <span>5:24</span></li>
+        <li data-time="627">Parameter Voting <span>10:27</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 中間 Video -->
+  <div id="video-section">
+    <div class="video-wrapper">
+      <iframe id="player"
+        src="https://www.youtube.com/embed/JLidIrekDbg"
+        frameborder="0" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- 右側 Description -->
+  <div id="description">
+    <p>
+      <strong>Brief Description:</strong> A technique to detect geometric shapes (like lines, circles, or ellipses) in an image.
+        The idea of Hough Transform is to map edge points from the image into a parameter space and then use each edge point to vote for all possible shapes.
+        The shapes with the most votes in parameter space correspond to the most likely shapes in the image.
+    </p>
+    <img src="./Hough_transform.png" alt="example of Hough transform">
+  </div>
+</div>
+
+<!-- 最下面 Footer -->
+<div id="footer">
+  Histogram Matching (2025/09/02).
+</div>
+
+<!-- 控制影片播放（直接改 src） -->
+<script>
+const videoId = "JLidIrekDbg";
+const player = document.getElementById("player");
+
+document.querySelectorAll("#timeline li").forEach(item => {
+  item.addEventListener("click", () => {
+    const time = parseInt(item.getAttribute("data-time"));
+    player.src = `https://www.youtube.com/embed/${videoId}?start=${time}&autoplay=1`;
+  });
+});
+</script>
+</body>
+</html>
