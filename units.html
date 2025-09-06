@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>項目展示</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  background: #f9f9f9;
+}
+.header input {
+  padding: 6px;
+  font-size: 14px;
+  width: 200px;
+}
+.content {
+  padding: 15px;
+}
+.item {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 標題與描述間距 */
+}
+.item:hover {
+  background: #f2f2f2;
+}
+.item h2 {
+  font-size: 16px;
+  margin: 0;
+  display: inline;
+}
+.item span {
+  font-size: 14px;
+  color: #555;
+}
+.item::before {
+  content: "•"; /* 項目符號 */
+  margin-right: 8px;
+  color: #333;
+  font-size: 18px;
+}
+mark {
+  background: black;
+  color: white;
+  font-weight: bold;
+  padding: 0 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- 右上角搜尋 -->
+<div class="header">
+  <input type="text" id="search" placeholder="搜尋項目...">
+</div>
+
+<!-- 中間內容 -->
+<div class="content" id="content"></div>
+
+<!-- 先載入 menuData.js，再載入 index.js -->
+<script src="./unit_list.js"></script>
+
+<script>
+const content = document.getElementById('content');
+const searchInput = document.getElementById('search');
+
+// 產生單一項目 (整行顯示 title + description)
+function createItemElement(item, keyword = "") {
+  const div = document.createElement('div');
+  div.className = 'item';
+
+  const regex = new RegExp(`(${keyword})`, 'gi');
+  const titleHTML = keyword ? item.title.replace(regex, "<mark>$1</mark>") : item.title;
+  const descHTML = keyword ? item.description.replace(regex, "<mark>$1</mark>") : item.description;
+
+  div.innerHTML = `<h2>${titleHTML}</h2><span>${descHTML}</span>`;
+
+  // 點擊整行跳頁
+  div.addEventListener('click', () => {
+    window.location.href = item.link;
+  });
+
+  return div;
+}
+
+// 渲染所有項目
+function renderItems(data, keyword = "") {
+  content.innerHTML = "";
+  data.forEach(item => {
+    const div = createItemElement(item, keyword);
+    content.appendChild(div);
+  });
+}
+
+// 初始渲染
+renderItems(unit_data);
+
+// 搜尋功能 (不隱藏，只 highlight)
+searchInput.addEventListener('input', e => {
+  const keyword = e.target.value.trim();
+  renderItems(unit_data, keyword);
+});
+</script>
+
+</body>
+</html>
