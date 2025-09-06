@@ -1,0 +1,106 @@
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>Histogram Equalization</title>
+
+<!-- 引入 Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- 引入 Akaya Kanadaka font-->
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+
+<!-- 導入外部 CSS -->
+<link rel="stylesheet" href="unit.css">
+
+<style>
+/* 讓影片自適應 RWD */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#timeline li {
+  cursor: pointer;
+  padding: 5px;
+  transition: background 0.3s;
+}
+#timeline li:hover {
+  background: #f0f0f0;
+}
+    
+</style>
+</head>
+<body>
+<div id="container">
+  <!-- 左側 Sidebar -->
+  <div id="sidebar">
+    <div id="toolbar">
+      <a href="https://www.youtube.com/watch?v=3PYI3pg7uvE" target="_blank">
+        <i class="fab fa-youtube" style="color:red;"></i> YouTube
+      </a>
+      <a href="./slides/two_pass_connected_components.pdf" target="_blank">
+        <i class="fas fa-file-powerpoint" style="color:#E86C2A;"></i> PPT
+      </a>
+      <a href="./slides/two_pass_connected_components.pdf" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+    <div id="timeline">
+      <h3>Time Line</h3>
+      <ul>
+        <li data-time="63">About CCL <span>1:03</span></li>
+        <li data-time="194">Connectivity <span>3:14</span></li>
+        <li data-time="308">Connected Component <span>5:08</span></li>
+        <li data-time="395">Approach Overview <span>6:35</span></li>
+        <li data-time="546">First Pass<span>9:06</span></li>
+        <li data-time="746">Second Pass<span>12:26</span></li>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- 中間 Video -->
+  <div id="video-section">
+    <div class="video-wrapper">
+      <iframe id="player"
+        src="https://www.youtube.com/embed/3PYI3pg7uvE"
+        frameborder="0" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- 右側 Description -->
+  <div id="description">
+    <p>
+      <strong>Brief Description:</strong> Two-pass connected component labeling (CCL) is a classic algorithm to detect and label distinct connected regions (components) in a binary image. The output is a labeled image where each connected region has a unique label ID. To achieve this, the first pass is to assign temporal labels  and record label equivalences; the second pass is to resolve equivalence relations and do the re-label.
+    </p>
+    <img src="./two-pass%20connected%20components.png" alt="example of connected component labeling">
+  </div>
+</div>
+
+<!-- 最下面 Footer -->
+<div id="footer">
+  Otus thresholding (2025/09/05).
+</div>
+
+<!-- 控制影片播放（直接改 src） -->
+<script>
+const videoId = "3PYI3pg7uvE";
+const player = document.getElementById("player");
+
+document.querySelectorAll("#timeline li").forEach(item => {
+  item.addEventListener("click", () => {
+    const time = parseInt(item.getAttribute("data-time"));
+    player.src = `https://www.youtube.com/embed/${videoId}?start=${time}&autoplay=1`;
+  });
+});
+</script>
+</body>
+</html>
