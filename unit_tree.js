@@ -15,13 +15,13 @@ const unit_data = {
                 {name:"Otsu Thresholding",href:"./classic_DIP/otsu_thresholding.html"},
                 {name:"Two-Pass Connected Component Labeling",href:"./classic_DIP/two_pass_connected_components.html"},
                 {name:"Hough Transform",href:"./classic_DIP/hough_transform.html"},                
-                {name:"Graph Segmentation",href:"#"},
-                {name:"Interactive Graph Cuts",href:"#"}
+                {name:"Efficient Graph-Based Segmentation",href:"./classic_DIP/efficient_graph_segmentation.html"},
+                {name:"Interactive Graph Cuts",href:"./classic_DIP/interactive_graph_cuts.html"}
             ]
         },
         
         "Texture Feature": {
-            link:"page2.html",
+            link:"page2.html", 
             units:[
                 {name:"Haar-Like Feature",href:"#"},
                 {name:"LBP: Local Binary Pattern",href:"#"},

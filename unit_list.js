@@ -1,6 +1,12 @@
 // unit_data.js
 const unit_data = [
   {
+    title: "Efficient Graph-Based Segmentation",
+    description: "A segmentation algorithm that captures perceptually important regions that reflect global aspect instead of local aspect.",
+    link: "./classic_DIP/efficient_graph_segmentation.html"
+  },
+
+  {
     title: "Histogram Equalization",
     description: "An image enhancement algorithm that makes the histogram of the resulting image closer to a uniform distribution",
     link: "./classic_DIP/histogram_equalization.html"
@@ -18,6 +24,12 @@ const unit_data = [
     link: "./classic_DIP/Hough_transform.html"
   },
 
+  {
+    title: "Interactive Graph Cuts",
+    description: "An interactive segmentation algorithm that performs segmentation based on user guidance by enforcing both boundary and region properties.",
+    link: "./classic_DIP/interactive_graph_cuts.html"
+  },
+    
   {
     title: "Otsu Thresholding:",
     description: "A global image thresholding method used in image processing to automatically separate an image into two classes. ",
