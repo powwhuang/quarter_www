@@ -1,0 +1,104 @@
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>LBP</title>
+
+<!-- 引入 Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- 引入 Akaya Kanadaka font-->
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+
+<!-- 導入外部 CSS -->
+<link rel="stylesheet" href="unit.css">
+
+<style>
+/* 讓影片自適應 RWD */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#timeline li {
+  cursor: pointer;
+  padding: 5px;
+  transition: background 0.3s;
+}
+#timeline li:hover {
+  background: #f0f0f0;
+}
+</style>
+</head>
+<body>
+<div id="container">
+  <!-- 左側 Sidebar -->
+  <div id="sidebar">
+    <div id="toolbar">
+      <a href="https://www.youtube.com/watch?v=TA9yH0kCKm4" target="_blank">
+        <i class="fab fa-youtube" style="color:red;"></i> YouTube
+      </a>
+      <a href="./slides/LBP.pdf" target="_blank">
+        <i class="fas fa-file-powerpoint" style="color:#E86C2A;"></i> PPT
+      </a>
+      <a href="./codes/histogram_matching.pdf" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+    <div id="timeline">
+      <h3>Time Line</h3>
+      <ul>
+        <li data-time="57">Introduction <span>0:57</span></li>
+        <li data-time="169">Binary Encoding <span>2:49</span></li>
+        <li data-time="379">Non-Uniform Pattern Handling<span>6:19</span></li>
+        <li data-time="510">Block Description<span>8:30</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 中間 Video -->
+  <div id="video-section">
+    <div class="video-wrapper">
+      <iframe id="player"
+        src="https://www.youtube.com/embed/TA9yH0kCKm4"
+        frameborder="0" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- 右側 Description -->
+  <div id="description">
+    <p>
+      <strong>Brief Description:</strong> LBP is a descriptor for describing the texture of a rectangular block consisting of two steps.
+        The first step is to encode every point in the block as a pattern called LBP.
+        Then, a 3x3 mask centered at every point is used for LBP encoding
+    </p>
+    <img src="./LBP.png" alt="example of LBP">
+  </div>
+</div>
+
+<!-- 最下面 Footer -->
+<div id="footer">
+  Local Binary Pattern (2025/09/12).
+</div>
+
+<!-- 控制影片播放（直接改 src） -->
+<script>
+const videoId = "TA9yH0kCKm4";
+const player = document.getElementById("player");
+
+document.querySelectorAll("#timeline li").forEach(item => {
+  item.addEventListener("click", () => {
+    const time = parseInt(item.getAttribute("data-time"));
+    player.src = `https://www.youtube.com/embed/${videoId}?start=${time}&autoplay=1`;
+  });
+});
+</script>
+</body>
+</html>
