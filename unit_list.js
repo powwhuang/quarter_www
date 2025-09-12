@@ -35,9 +35,15 @@ const unit_data = [
     description: "An interactive segmentation algorithm that performs segmentation based on user guidance by enforcing both boundary and region properties.",
     link: "./classic_DIP/interactive_graph_cuts.html"
   },
+
+  {
+    title: "LBP",
+    description: "LBP is a descriptor for describing the texture of a rectangular block consisting of LBP encoding and voting",
+    link: "./classic_DIP/LBP.html"
+  },
     
   {
-    title: "Otsu Thresholding:",
+    title: "Otsu Thresholding",
     description: "A global image thresholding method used in image processing to automatically separate an image into two classes. ",
     link: "./classic_DIP/otsu_thresholding.html"
   },

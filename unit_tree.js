@@ -24,7 +24,7 @@ const unit_data = {
             link:"page2.html", 
             units:[
                 {name:"Haar-Like Feature",href:"#"},
-                {name:"LBP: Local Binary Pattern",href:"#"},
+                {name:"LBP: Local Binary Pattern",href:"./classic_DIP/LBP.html"},
                 {name:"HOGs: Histogram of Oriented Gradients",href:"./classic_DIP/HOGs.html"},
                 {name:"HLID: Histogram of Local Intensity Difference",href:"#"}
             ]
