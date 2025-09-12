@@ -19,6 +19,12 @@ const unit_data = [
   },
 
   {
+    title: "HOGs",
+    description: "A texture feature descriptor of a rectangular block as a histogram of oriented gradients",
+    link: "./classic_DIP/HOGs.html"
+  },
+
+  {
     title: "Hough Transform",
     description: "A technique to detect geometric shapes (like lines, circles, or ellipses) in an image by parameterization and voting. ",
     link: "./classic_DIP/Hough_transform.html"
