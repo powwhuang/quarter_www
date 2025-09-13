@@ -25,6 +25,12 @@ const unit_data = [
   },
 
   {
+    title: "HLID (histogram of local intensity difference)",
+    description: "A texture feature descriptor espcially used for FIR pedestrian detection.",
+    link: "./classic_DIP/HLID.html"
+  },
+
+  {
     title: "HOGs",
     description: "A texture feature descriptor of a rectangular block as a histogram of oriented gradients.",
     link: "./classic_DIP/HOGs.html"
