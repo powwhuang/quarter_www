@@ -1,0 +1,101 @@
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>Haar-Like Feature</title>
+
+<!-- 引入 Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- 引入 Akaya Kanadaka font-->
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+
+<!-- 導入外部 CSS -->
+<link rel="stylesheet" href="unit.css">
+
+<style>
+/* 讓影片自適應 RWD */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#timeline li {
+  cursor: pointer;
+  padding: 5px;
+  transition: background 0.3s;
+}
+#timeline li:hover {
+  background: #f0f0f0;
+}
+</style>
+</head>
+<body>
+<div id="container">
+  <!-- 左側 Sidebar -->
+  <div id="sidebar">
+    <div id="toolbar">
+      <a href="https://www.youtube.com/watch?v=wkmdDnhGrLo" target="_blank">
+        <i class="fab fa-youtube" style="color:red;"></i> YouTube
+      </a>
+      <a href="./slides/Haar_like_feature.pdf" target="_blank">
+        <i class="fas fa-file-powerpoint" style="color:#E86C2A;"></i> PPT
+      </a>
+      <a href="./codes/histogram_matching.pdf" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+    </div>
+    <div id="timeline">
+      <h3>Time Line</h3>
+      <ul>
+        <li data-time="41">Introduction <span>0:41</span></li>
+        <li data-time="114">Response Definition <span>1:54</span></li>
+        <li data-time="273">Fast Computation<span>4:33</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 中間 Video -->
+  <div id="video-section">
+    <div class="video-wrapper">
+      <iframe id="player"
+        src="https://www.youtube.com/embed/wkmdDnhGrLo"
+        frameborder="0" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- 右側 Description -->
+  <div id="description">
+    <p>
+      <strong>Brief Description:</strong> Haar-like features are simple texture features used in early object detection methods, most famously in the Viola–Jones face detector. They are based on differences in pixel intensity between adjacent rectangular regions. Efficient computation is achieved using the integral image, which allows fast calculation of sums over rectangles.                 
+    </p>
+    <img src="./Haar.png" alt="example of Haar">
+  </div>
+</div>
+
+<!-- 最下面 Footer -->
+<div id="footer">
+  Haar-Like Feature (2025/09/13).
+</div>
+
+<!-- 控制影片播放（直接改 src） -->
+<script>
+const videoId = "wkmdDnhGrLo";
+const player = document.getElementById("player");
+
+document.querySelectorAll("#timeline li").forEach(item => {
+  item.addEventListener("click", () => {
+    const time = parseInt(item.getAttribute("data-time"));
+    player.src = `https://www.youtube.com/embed/${videoId}?start=${time}&autoplay=1`;
+  });
+});
+</script>
+</body>
+</html>
