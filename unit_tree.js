@@ -56,7 +56,7 @@ const unit_data = {
         }
     },
     
-    "CNN DIP": {
+    "Deep DIP": {
         "Object Classification": {
             link:"page2.html",
             units:[
@@ -80,9 +80,7 @@ const unit_data = {
             units:[
                 {name:"Mask R-CNN",href:"#"},                
             ]
-        }
-
-        
+        }       
     },
     
     "Recurrent Neural Network": {
